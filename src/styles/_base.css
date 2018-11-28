@@ -1,0 +1,23 @@
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /* this is used for all sizing (rem). */
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+:focus {
+  outline-color: var(--color-secondary);
+}
+
+button {
+  color: var(--color-primary-on-bg);
+}
+
+button path {
+  stroke: var(--color-primary-on-bg);
+}
