@@ -1,0 +1,60 @@
+/* 
+ * logo + text main header
+ */
+
+.logo-header {
+  font-family: lazer84;
+  min-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 500px;
+  position: relative;
+}
+
+.logo__profile-pic {
+  border-radius: 50%;
+  border: 0.45rem solid var(--color-on-primary-border);
+  height: var(--layout-main-logo-size);
+  box-shadow: 0.5rem 0.3rem var(--color-on-primary-dropshadow);
+}
+
+.logo__text__line1,
+.logo__text__line2 {
+  font-size: var(--layout-main-logo-font-size);
+  position: absolute;
+  left: var(--layout-main-logo-size);
+  text-shadow: 0.5rem 0.3rem var(--color-on-primary-dropshadow);
+  transform: rotate(-5deg);
+}
+
+.logo__text__line2 {
+  top: var(--layout-main-logo-font-size);
+  left: calc(var(--layout-main-logo-size) - 15px);
+}
+
+/* responsive resize for < browser */
+
+@media (max-width: 768px) {
+  .logo {
+    width: 355px;
+  }
+
+  .logo__profile-pic {
+    height: var(--layout-responsive-main-logo-size);
+  }
+
+  .logo__text__line1,
+  .logo__text__line2 {
+    left: var(--layout-responsive-main-logo-size);
+    font-size: var(--layout-responsive-main-logo-font-size);
+  }
+
+  .logo__text__line2 {
+    top: var(--layout-responsive-main-logo-font-size);
+    left: calc(var(--layout-responsive-main-logo-size) - 15px);
+  }
+}
