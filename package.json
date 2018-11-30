@@ -9,7 +9,7 @@
     "build": "npm run build:clean && npm run build:webpack:prod",
     "build:webpack:prod": "cross-env NODE_ENV=prod webpack --config ./webpack.config.js --mode=production",
     "build:clean": "rimraf ./dist",
-    "serve": "serve -s -p 7134",
+    "serve": "serve -s -p 7134 ./dist",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg"
   },

@@ -8,10 +8,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
+/* logo pic + text */
 .logo {
-  width: 500px;
+  width: var(--layout-main-logo-width);
   position: relative;
 }
 
@@ -37,24 +39,87 @@
 }
 
 /* responsive resize for < browser */
-
 @media (max-width: 768px) {
   .logo {
-    width: 355px;
+    width: var(--layout-main-logo-width-md);
   }
 
   .logo__profile-pic {
-    height: var(--layout-responsive-main-logo-size);
+    height: var(--layout-main-logo-size-md);
   }
 
   .logo__text__line1,
   .logo__text__line2 {
-    left: var(--layout-responsive-main-logo-size);
-    font-size: var(--layout-responsive-main-logo-font-size);
+    left: var(--layout-main-logo-size-md);
+    font-size: var(--layout-main-logo-font-size-md);
   }
 
   .logo__text__line2 {
-    top: var(--layout-responsive-main-logo-font-size);
-    left: calc(var(--layout-responsive-main-logo-size) - 15px);
+    top: var(--layout-main-logo-font-size-md);
+    left: calc(var(--layout-main-logo-size-md) - 15px);
+  }
+}
+/* responsive resize for mobile */
+@media (max-width: 576px) {
+  .logo {
+    width: var(--layout-main-logo-width-sm);
+  }
+
+  .logo__profile-pic {
+    height: var(--layout-main-logo-size-sm);
+    margin-top: 0.25rem;
+  }
+
+  .logo__text__line1,
+  .logo__text__line2 {
+    left: calc(var(--layout-main-logo-size-sm) + 5px);
+    font-size: var(--layout-main-logo-font-size-sm);
+  }
+
+  .logo__text__line2 {
+    top: var(--layout-main-logo-font-size-sm);
+    left: calc(var(--layout-main-logo-size-sm) - 10px);
+  }
+}
+
+/* profile links */
+.profile-links {
+  margin-top: 2.5rem;
+  display: flex;
+  width: var(--layout-main-logo-width);
+  justify-content: space-evenly;
+}
+
+.profile-links__icon-button {
+  height: 3.5rem;
+  width: 3.5rem;
+  display: block;
+  color: var(--color-primary-on-bg);
+}
+
+.profile-links__icon-button:hover {
+  color: var(--color-primary-on-bg-hover);
+}
+
+/* responsive resize for < desktop */
+@media (max-width: 768px) {
+  .profile-links {
+    width: var(--layout-main-logo-width-md);
+  }
+
+  .profile-links__icon-button {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+/* responsive resize for mobile */
+@media (max-width: 576px) {
+  .profile-links {
+    width: var(--layout-main-logo-width-sm);
+  }
+
+  .profile-links__icon-button {
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
