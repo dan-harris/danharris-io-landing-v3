@@ -21,3 +21,8 @@ button {
 button path {
   stroke: var(--color-primary-on-bg);
 }
+
+/* default svg's to use parent color for fill */
+svg {
+  fill: currentColor;
+}

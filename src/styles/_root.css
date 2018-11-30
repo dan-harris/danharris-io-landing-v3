@@ -6,6 +6,7 @@
   --color-accent2: #a6a6a6;
   --color-white: #fff;
   --color-primary-on-bg: #938cb3;
+  --color-primary-on-bg-hover: #fff;
   --color-on-primary: #fff;
   --color-on-primary-border: #fff;
   --color-on-primary-dropshadow: #9a88c7;
@@ -16,7 +17,7 @@
   --media-lg: 992px;
   --media-xl: 1200px;
   /* layout */
-  --layout---layout-main-logo-size: 200px;
+  --layout-main-logo-size: 200px;
   --layout-responsive-main-logo-size: 120px;
   --layout-main-logo-font-size: 6rem;
   --layout-responsive-main-logo-font-size: 4rem;
