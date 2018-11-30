@@ -11,7 +11,9 @@
     "build:clean": "rimraf ./dist",
     "serve": "serve -s -p 7134 ./dist",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg"
+    "commitmsg": "validate-commit-msg",
+    "deploy": "npm run build && npm run deploy:aws",
+    "deploy:aws": "aws s3 sync dist/ s3://danharris.io"
   },
   "author": "dan-harris",
   "license": "ISC",
