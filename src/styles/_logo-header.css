@@ -11,6 +11,17 @@
   flex-direction: column;
 }
 
+.logo-header__bg {
+  /* background-image: url("../assets/generic-bg.svg"); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.1;
+}
+
 /* logo pic + text */
 .logo {
   width: var(--layout-main-logo-width);
@@ -87,7 +98,7 @@
   margin-top: 2.5rem;
   display: flex;
   width: var(--layout-main-logo-width);
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .profile-links__icon-button {
