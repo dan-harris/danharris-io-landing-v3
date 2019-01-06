@@ -1,4 +1,7 @@
 const path = require("path");
+/**
+ * webpack & plugins
+ */
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
@@ -20,6 +23,7 @@ const isDev = process.env.NODE_ENV !== "prod";
  * webpack config
  */
 module.exports = {
+  // entry files
   entry: {
     ["landing-page"]: "./src/landing-page.js"
   },
@@ -33,11 +37,30 @@ module.exports = {
   },
   module: {
     rules: [
+      // js
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: [
+              "@babel/plugin-transform-runtime",
+              "@babel/plugin-syntax-dynamic-import",
+              "@babel/plugin-transform-async-to-generator",
+              "@babel/plugin-transform-regenerator"
+            ]
+          }
+        }
+      },
       // css
       {
         test: /\.css$/,
         use: [
+          // default to standard style loader
           !isDev ? MiniCssExtractPlugin.loader : "style-loader",
+          // standard css loader
           {
             loader: "css-loader",
             options: {
@@ -46,6 +69,7 @@ module.exports = {
               importLoaders: 1
             }
           },
+          // postcss loader (autoprefix + embed custom properties)
           {
             loader: "postcss-loader",
             options: {
@@ -55,22 +79,11 @@ module.exports = {
               },
               sourceMap: isDev,
               plugins: [
-                 postcssAutoPrefixer,
-                  postcssCustomProperties({
-                    importFrom: "./src/styles/_root.css",
-                    preserve: false
-                  })
-                //require("postcss-modules")({
-                //generateScopedName: "[hash:base64:5]"
-                //   getJSON: function(cssFileName, json) {
-                //     var path = require("path");
-                //     var cssName = path.basename(cssFileName, ".css");
-                //     var jsonFileName = path.resolve(
-                //       "./dist/" + cssName + ".json"
-                //     );
-                //     fs.writeFileSync(jsonFileName, JSON.stringify(json));
-                //   }
-                // })
+                postcssAutoPrefixer,
+                postcssCustomProperties({
+                  importFrom: "./src/styles/_root.css",
+                  preserve: false
+                })
               ]
             }
           }
@@ -78,7 +91,7 @@ module.exports = {
       },
       // images & files
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|svg)$/,
         use: [
           {
             loader: "file-loader",
@@ -87,35 +100,37 @@ module.exports = {
               outputPath: "static/",
               useRelativePath: true
             }
-          },
-          {
-            loader: "image-webpack-loader",
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 65
-              },
-              optipng: {
-                enabled: true
-              },
-              pngquant: {
-                quality: "65-90",
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false
-              },
-              webp: {
-                quality: 75
-              }
-            }
           }
+          // {
+          //   loader: "image-webpack-loader",
+          //   options: {
+          //     mozjpeg: {
+          //       progressive: true,
+          //       quality: 65
+          //     },
+          //     optipng: {
+          //       enabled: true
+          //     },
+          //     pngquant: {
+          //       quality: "65-90",
+          //       speed: 4
+          //     },
+          //     gifsicle: {
+          //       interlaced: false
+          //     },
+          //     webp: {
+          //       quality: 75
+          //     }
+          //   }
+          // }
         ]
       }
     ]
   },
   plugins: [
+    // for older webpack extensions interop
     new webpack.LoaderOptionsPlugin({}),
+    // html setup (minify for prod)
     new HtmlWebpackPlugin({
       template: "./src/landing-page.html",
       minify: !isDev && {
@@ -126,10 +141,12 @@ module.exports = {
         removeEmptyElements: false
       }
     }),
+    // extract css
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
+    // minify & inline css
     new StyleExtHtmlWebpackPlugin({
       enabled: !isDev,
       minify: {
@@ -143,9 +160,11 @@ module.exports = {
         }
       }
     }),
+    // inline js
     new ScriptExtHtmlWebpackPlugin({
       inline: ["landing-page.js"]
     }),
+    // copy assets to dist
     new CopyWebpackPlugin([{ from: "./src/assets", to: "./" }])
   ]
 };
